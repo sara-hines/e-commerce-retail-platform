@@ -69,7 +69,7 @@ router.put('/:id', (req, res) => {
     })
         .then((product) => {
             if (req.body.tagIds && req.body.tagIds.length) {
-                
+
                 // Fetch all productTags associated with this product.
                 ProductTag.findAll({
                     where: { product_id: req.params.id }
