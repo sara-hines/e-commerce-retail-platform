@@ -1,115 +1,86 @@
 const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
 
-// The `/api/tags` endpoint
-
+// For requests to /api/tags, GET route to get all tags (including associated Product data).
 router.get('/', async (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
-  try {
-    const tagData = await Tag.findAll({
-      include: [{ model: Product, through: ProductTag }], 
-      order: [['id', 'ASC']]
-    });
-    res.status(200).json(tagData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+        const tagData = await Tag.findAll({
+            include: [{ model: Product, through: ProductTag }],
+            order: [['id', 'ASC']]
+        });
+        res.status(200).json(tagData);
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
+// For requests to /api/tags/:id, GET route to get a tag by id (including associated Product data).
 router.get('/:id', async (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
-  try {
-    const tagData = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product, through: ProductTag }],
-    });
+    try {
+        const tagData = await Tag.findByPk(req.params.id, {
+            include: [{ model: Product, through: ProductTag }],
+        });
 
-    if (!tagData) {
-      res.status(404).json({ message: 'No tag found with this id.' });
-      return;
+        if (!tagData) {
+            res.status(404).json({ message: 'No tag found with this id.' });
+            return;
+        }
+
+        res.status(200).json(tagData);
+
+    } catch (err) {
+        res.status(500).json(err);
     }
-
-    res.status(200).json(tagData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
+// For requests to /api/tags, POST route to create a new tag.
 router.post('/', (req, res) => {
-  // create a new tag
-  Tag.create(req.body)
-    .then((tag) => {
-      res.status(200).json(tag);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
+    Tag.create(req.body)
+        .then((tag) => {
+            res.status(200).json(tag);
+        })
+
+        .catch((err) => {
+            res.status(400).json(err);
+        });
 });
 
-// update tag
+// For requests to /api/tags/:id, PUT route to update a tag by id.
 router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
-  Tag.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((tag) => {
-      // if (req.body.productIds && req.body.productIds.length) {
-
-      //   ProductTag.findAll({
-      //     where: { tag_id: req.params.id }
-      //   }).then((tagProducts) => {
-      //     // create filtered list of new product_ids
-      //     const tagProductIds = tagProducts.map(({ product_id }) => product_id);
-      //     const newTagProducts = req.body.productIds
-      //     .filter((product_id) => !tagProductIds.includes(product_id))
-      //     .map((product_id) => {
-      //       return {
-      //         tag_id: req.params.id, 
-      //         product_id,
-      //       };
-      //     });
-
-      //       // figure out which ones to remove
-      //     const tagProductsToRemove = tagProducts
-      //     .filter(({ product_id }) => !req.body.productIds.includes(product_id))
-      //     .map(({ id }) => id);
-      //             // run both actions
-      //     return Promise.all([
-      //       ProductTag.destroy({ where: { id: tagProductsToRemove } }),
-      //       ProductTag.bulkCreate(newTagProducts),
-      //     ]);
-      //   });
-      // }
-
-      return res.json(tag);
+    Tag.update(req.body, {
+        where: {
+            id: req.params.id,
+        },
     })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+        .then((tag) => {
+            return res.json(`Number of rows updated: ${JSON.stringify(tag)}`);
+        })
+
+        .catch((err) => {
+            res.status(400).json(err);
+        });
 });
 
+// For requests to /api/tags/:id, DELETE route to delete a tag by id.
 router.delete('/:id', async (req, res) => {
-  // delete on tag by its `id` value
-  try {
-    const tagData = await Tag.destroy({
-      where: {
-        id: req.params.id
-      }
-    });
+    try {
+        const tagData = await Tag.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
 
-    if (!tagData) {
-      res.status(404).json({ message: 'No tag found with this id.' });
-      return;
+        if (!tagData) {
+            res.status(404).json({ message: 'No tag found with this id.' });
+            return;
+        }
+
+        return res.status(200).json(`Number of rows deleted: ${JSON.stringify(tagData)}`);
+        
+    } catch (err) {
+        res.status(500).json(err);
     }
-
-    res.status(200).json(tagData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 module.exports = router;

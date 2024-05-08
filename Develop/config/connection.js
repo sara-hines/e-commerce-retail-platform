@@ -1,4 +1,7 @@
+// dotenv allows access to the environmental variables from the .env
 require('dotenv').config();
+
+// Establish the sequelize connection to the database
 
 const Sequelize = require('sequelize');
 

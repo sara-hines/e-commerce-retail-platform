@@ -1,5 +1,7 @@
+// Require Model and DataTypes from sequelize library.
 const { Model, DataTypes } = require('sequelize');
 
+// Require database connection from config.js.
 const sequelize = require('../config/connection.js');
 
 class Category extends Model {}

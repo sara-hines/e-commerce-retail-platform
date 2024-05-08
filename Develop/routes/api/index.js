@@ -1,3 +1,5 @@
+// Direct requests to the appropriate location. 
+
 const router = require('express').Router();
 const categoryRoutes = require('./category-routes');
 const productRoutes = require('./product-routes');

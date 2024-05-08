@@ -1,7 +1,9 @@
-// THIS IS LIKE TRIP IN THE MINI PROJECT
+// ProductTag is used as a junction table to help facilitate the many-to-many relationship between Products and Tags.
 
+// Require Model and DataTypes from sequelize library.
 const { Model, DataTypes } = require('sequelize');
 
+// Require database connection from config.js.
 const sequelize = require('../config/connection');
 
 class ProductTag extends Model {}

@@ -1,3 +1,5 @@
+// Seed tables/models once the models have been able to synchronize with the database.
+
 const seedCategories = require('./category-seeds');
 const seedProducts = require('./product-seeds');
 const seedTags = require('./tag-seeds');
