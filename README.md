@@ -190,7 +190,7 @@ To use this API, you'll need to have Node.js and PostgreSQL installed locally. N
 
 ## Model Relationships Reference
 
-<img src="./assets/img/erd.png" alt="Entity Relationship Diagram" />
+<img src="./Assets/img/erd.png" alt="Entity Relationship Diagram" />
 
 <br />
 Model relationships are vital for accurately storing and tracking the data that underpins the entire e-commerce websites. Feel free to refer to the above Entity Relationship Diagram (ERD) and the model relationship descriptions to better understand how this back-end application manages e-commerce inventory. 
@@ -212,7 +212,7 @@ These relationships allow products to be organized and filtered, and allow addit
 
 Open the API client of your choosing and send a GET request to localhost:3001/api/categories to see all categories (based on the seed data). The response will be an array of objects starting with the category named "Shirts", id of 1. It should look like the following image:
 
-![get all categories](./assets/img/image-1.png)
+![get all categories](./Assets/img/image-1.png)
 
 <br />
 
@@ -220,7 +220,7 @@ Open the API client of your choosing and send a GET request to localhost:3001/ap
 
 To find a single category by id, send a GET request to localhost:3001/api/categories/:id using the desired category's id as the request parameter. For example, the following GET request to localhost:3001/api/categories/1 retrieves only the category with the id of 1: 
 
-![get single category](./assets/img/image-2.png)
+![get single category](./Assets/img/image-2.png)
 
 <br />
 
@@ -228,7 +228,7 @@ To find a single category by id, send a GET request to localhost:3001/api/catego
 
 Create a new category by sending a POST request to localhost:3001/api/categories, making sure to include the category_name in the request body. The below request creates a new category with the category_name "Jackets."
 
-![post category](./assets/img/image-7.png)
+![post category](./Assets/img/image-7.png)
 
 <br />
 
@@ -236,7 +236,7 @@ Create a new category by sending a POST request to localhost:3001/api/categories
 
 If you need to modify an already existing category, send a PUT request to localhost:3001/api/categories/:id with the updated information in the request body. The below request changes the category_name of the previously created category (with the id of 6) from "Jackets" to "Indie Music."
 
-![put category](./assets/img/image-8.png)
+![put category](./Assets/img/image-8.png)
 
 <br />
 
@@ -244,7 +244,7 @@ If you need to modify an already existing category, send a PUT request to localh
 
 The final route for categories is the DELETE route, localhost:3001/api/categories/:id (where :id is the id of the category to be deleted). In the below screenshot, the "Indie Music" category with id=6 is deleted from the database.
 
-![delete category](./assets/img/image-9.png)
+![delete category](./Assets/img/image-9.png)
 
 <br />
 
@@ -254,11 +254,11 @@ The final route for categories is the DELETE route, localhost:3001/api/categorie
 
 A GET request to localhost:3001/api/products will fetch all products, along with their category and tag data. The below 3 screenshots show the nested structure of the array of product objects returned.
 
-![get all products img1](./assets/img/image-10.png)
+![get all products img1](./Assets/img/image-10.png)
 
-![get all products img2](./assets/img/image-11.png)
+![get all products img2](./Assets/img/image-11.png)
 
-![get all products img3](./assets/img/image-12.png)
+![get all products img3](./Assets/img/image-12.png)
 
 <br />
 
@@ -266,7 +266,7 @@ A GET request to localhost:3001/api/products will fetch all products, along with
 
 A GET request to localhost:3001/api/products/:id will return a single product by id. The below screenshot shows the structure of the product with id = 1, which has a product_name of "Plain T-Shirt."
 
-![get single product](./assets/img/image-13.png)
+![get single product](./Assets/img/image-13.png)
 
 <br />
 
@@ -276,15 +276,15 @@ To create a new product, send a POST request to localhost:3001/api/products incl
 
 If you provide tagIds in the request body, the response will be the array of productTagId's created from the tagIds you provided. The ProductTag model is used as a joint table that facilitates the many-to-many relationship between Product and Tag, and using this structure gives us a clean way to work with that many-to-many relationship. The below 2 screenshots show examples of (1) the POST request with the array of productTagId's as the response, and (2) the full, newly created product.
 
-![post product img1](./assets/img/image-14.png)
+![post product img1](./Assets/img/image-14.png)
 
-![post product img2](./assets/img/image-15.png)
+![post product img2](./Assets/img/image-15.png)
 
 <br />
 
 If you do not provide tagIds in the request body (you should still provide the tagIds property, but just use an empty array for the value), the response will be the newly created product itself—see the below screenshot for an example. 
 
-![post product img3](./assets/img/image-16.png)
+![post product img3](./Assets/img/image-16.png)
 
 <br />
 
@@ -292,7 +292,7 @@ If you do not provide tagIds in the request body (you should still provide the t
 
 To update a product, send a PUT request to localhost:3001/api/products/:id, including the values for product_name, price, stock, and tagIds which you'd like the updated product to have. The response will be a number of rows updated. 
 
-![put product](./assets/img/image-17.png)
+![put product](./Assets/img/image-17.png)
 
 <br />
 
@@ -300,7 +300,7 @@ To update a product, send a PUT request to localhost:3001/api/products/:id, incl
 
 Deleting a product requires only the id of the product to be deleted, used as a request parameter in the URI endpoint (send requests to localhost:3001/api/products/:id). The below screenshot shows a successful deletion of the product with the id of 6. The response is the number of rows deleted.
 
-![delete product](./assets/img/image-18.png)
+![delete product](./Assets/img/image-18.png)
 
 <br />
 
@@ -310,7 +310,7 @@ Deleting a product requires only the id of the product to be deleted, used as a 
 
 Send a GET request to localhost:3001/api/tags to view all tags. The below screenshot shows the full structure of the first tag which appears (the tag with the id of 1).
 
-![get all tags](./assets/img/image-19.png)
+![get all tags](./Assets/img/image-19.png)
 
 <br />
 
@@ -318,7 +318,7 @@ Send a GET request to localhost:3001/api/tags to view all tags. The below screen
 
 GET a single tag by id by sending a GET request to localhost:3001/api/tags/:id. In the below screenshot, the id of 1 in the request parameter retrieved the tag with the id of 1. 
 
-![get single tag](./assets/img/image-20.png)
+![get single tag](./Assets/img/image-20.png)
 
 <br />
 
@@ -326,7 +326,7 @@ GET a single tag by id by sending a GET request to localhost:3001/api/tags/:id. 
 
 Creating a new tag is simple—just send a POST request to localhost:3001/api/tags, including the tag_name in the request body, similar to the below screenshot: 
 
-![post tag](./assets/img/image-21.png)
+![post tag](./Assets/img/image-21.png)
 
 <br />
 
@@ -334,7 +334,7 @@ Creating a new tag is simple—just send a POST request to localhost:3001/api/ta
 
 To update a tag, send a PUT request to localhost:3001/api/tags/:id while including the new tag_name in the request body. In the below screenshot, the previously created tag with the tag_name of "on sale" is changed to have a tag_name of "clearance."
 
-![update tag](./assets/img/put-tag.png)
+![update tag](./Assets/img/put-tag.png)
 
 <br />
 
@@ -342,7 +342,7 @@ To update a tag, send a PUT request to localhost:3001/api/tags/:id while includi
 
 To delete a tag, send a DELETE request to localhost:3001/api/tags/:id, where the id request parameter is the id of the tag to be deleted. 
 
-![delete tag](./assets/img/image-22.png)
+![delete tag](./Assets/img/image-22.png)
 
 <br />
 
@@ -377,7 +377,7 @@ This project is covered under the MIT License. You can learn more about this lic
 
 
 
-<!-- CONTACT -->
+<!-- CONTACT INFO -->
 ## Contact
 
 If you have any questions/thoughts about this project or would like to connect, you can reach me at https://github.com/sara-hines/ or sara.marie.hines1@gmail.com. I look forward to hearing from you!
