@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
     })
         .then((category) => {
             if (req.body.productIds && req.body.productIds.length) {
-                
+
                 // Find the category to update
                 Category.findAll({
                     where: { category_id: req.params.id }
@@ -77,12 +77,12 @@ router.put('/:id', (req, res) => {
                                 product_id,
                             };
                         });
-                    
+
                     // Remove all product ids which were present in the database but not present in the req.body.
                     const productIdsToRemove = productIds
                         .filter(({ product_id }) => !req.body.productIds.includes(product_id))
                         .map(({ id }) => id);
-                    
+
                     return Promise.all([
                         // Remove product ids no longer associated with the category.
                         Category.destroy({ where: { id: productIdsToRemove } }),
